@@ -14,16 +14,6 @@ import java.io.IOException;
 
 public class JavaProjectCreator extends AbstractPage {
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        doRequest(request, response);
-    }
-
-    public void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        doRequest(request, response);
-    }
-
     public void doRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         //super.doRequest(request, response);

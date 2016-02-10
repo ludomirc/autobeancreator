@@ -15,18 +15,8 @@ import java.io.IOException;
 
 public class HomePage extends AbstractPage {
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        doRequest(request, response);
-    }
 
-    public void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        doRequest(request, response);
-    }
-
-    public void doRequest(HttpServletRequest request,
-                          HttpServletResponse response) throws ServletException, IOException {
+    public void doRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AbstractItem[] outItems = {};
         sessionID = request.getSession(true);
         con = getConnection();
@@ -38,9 +28,7 @@ public class HomePage extends AbstractPage {
         return;
     }
 
-    public void doRequest(HttpServletRequest request,
-                          HttpServletResponse response, String reason)
-            throws ServletException, IOException {
+    public void doRequest(HttpServletRequest request,HttpServletResponse response, String reason) throws ServletException, IOException {
         AbstractItem[] outItems = {};
         Document myGroupsDOM = createDom(outItems, "");
         Element root = myGroupsDOM.getDocumentElement();
@@ -50,8 +38,7 @@ public class HomePage extends AbstractPage {
     }
 
     //creates nodes for the XML document.
-    public Document createDom(AbstractItem[] inItem, String title, String reason)
-            throws ServletException {
+    public Document createDom(AbstractItem[] inItem, String title, String reason) throws ServletException {
         Document doc = null;
         try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
