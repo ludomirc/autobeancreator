@@ -1,5 +1,6 @@
 package net.xanda.autobeancreator.servlet;
 
+import net.xanda.autobeancreator.servlet.util.DateConverter;
 import org.w3c.dom.Document;
 
 import javax.servlet.ServletException;
