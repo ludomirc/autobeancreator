@@ -1,4 +1,4 @@
-package net.xanda.autobeancreator.servlet;
+package net.xanda.autobeancreator.servlet.util;
 
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;

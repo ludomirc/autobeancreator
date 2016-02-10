@@ -1,4 +1,4 @@
-package net.xanda.autobeancreator.servlet;
+package net.xanda.autobeancreator.servlet.util;
 
 import org.w3c.dom.Document;
 
