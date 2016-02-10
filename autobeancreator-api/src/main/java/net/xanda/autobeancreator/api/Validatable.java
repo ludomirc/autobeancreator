@@ -1,7 +1,6 @@
 package net.xanda.autobeancreator.api;//import FieldFault;
 
 import java.io.Serializable;
-import java.lang.String;
 
 /**
  * \file Validatable.java
@@ -17,7 +16,6 @@ public interface Validatable extends Serializable {
 	/**
 	 * Return an instance with the same value as the receiver.
 	 * 
-	 * @param Object
 	 *            s: the instance's value
 	 * @return Validatable
 	 */
@@ -42,7 +40,6 @@ public interface Validatable extends Serializable {
 	/**
 	 * Mark this instance as invalid.
 	 * 
-	 * @param Object
 	 *            s: message text
 	 */
 	void notOK(String s);

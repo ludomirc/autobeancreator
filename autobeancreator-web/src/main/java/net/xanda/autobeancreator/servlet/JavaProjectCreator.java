@@ -1,14 +1,13 @@
 package net.xanda.autobeancreator.servlet;
 
-import java.io.IOException;
+import net.xanda.autobeancreator.api.*;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import net.xanda.autobeancreator.api.*;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
+import java.io.IOException;
 
 public class JavaProjectCreator extends AbstractPage {
 	

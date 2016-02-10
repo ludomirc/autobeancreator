@@ -1,8 +1,8 @@
 package net.xanda.autobeancreator.servlet;
 
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
+import net.xanda.autobeancreator.api.AbstractItem;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,10 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-
-import net.xanda.autobeancreator.api.AbstractItem;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
 
 public abstract class AbstractPage extends HttpServlet {
 

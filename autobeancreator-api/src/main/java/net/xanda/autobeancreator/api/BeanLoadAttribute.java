@@ -1,11 +1,11 @@
 package net.xanda.autobeancreator.api;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 
 public class BeanLoadAttribute extends AbstractItem {
 

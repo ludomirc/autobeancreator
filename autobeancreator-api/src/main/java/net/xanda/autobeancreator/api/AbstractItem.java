@@ -1,6 +1,7 @@
 package net.xanda.autobeancreator.api;
 
-import org.w3c.dom.*;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 
 public abstract class AbstractItem {
