@@ -8,10 +8,12 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@WebServlet("/javaprojectcreator")
 public class JavaProjectCreator extends AbstractPage {
 
     public void doRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

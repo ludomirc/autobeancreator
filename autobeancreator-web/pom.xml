@@ -18,10 +18,18 @@
 
     <dependencies>
 
+        <!-- local dependency-->
         <dependency>
             <groupId>net.xanda.autobeancreator</groupId>
             <artifactId>autobeancreator-api</artifactId>
             <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>compile</scope>
         </dependency>
 
         <!-- JEE servlet dependency -->
