@@ -5,6 +5,7 @@ import org.w3c.dom.Element;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 public class BeanLoad extends AbstractItem {
@@ -28,7 +29,7 @@ public class BeanLoad extends AbstractItem {
         try {
             Statement stmt = con.createStatement();
             int updater = stmt.executeUpdate("INSERT INTO beanload VALUES('', '" + blName + "', '" + beanID + "', '" + bltID + "');");
-            ResultSet res = stmt.executeQuery("SELECT blID FROM beanload WHERE blName='" + blName + "' AND beanID='" + beanID + "' AND bltID='" + bltID + "';");
+            ResultSet res = stmt.executeQuery("SELECT bl_id FROM beanload WHERE bl_name='" + blName + "' AND bean_id='" + beanID + "' AND blt_id='" + bltID + "';");
             res.next();
             return res.getInt(1);
         } catch (Exception e) {
@@ -41,9 +42,9 @@ public class BeanLoad extends AbstractItem {
     public static BeanLoad loadByID(int blID, Connection con) {
         try {
             Statement stmt = con.createStatement();
-            ResultSet res = stmt.executeQuery("SELECT * FROM beanload WHERE blID = '" + blID + "';");
+            ResultSet res = stmt.executeQuery("SELECT * FROM beanload WHERE bl_id = '" + blID + "';");
             if (res.next()) {
-                return new BeanLoad(res.getInt("blID"), res.getString("blName"), res.getInt("beanID"), res.getInt("bltID"));
+                return new BeanLoad(res.getInt("bl_id"), res.getString("bl_name"), res.getInt("bean_id"), res.getInt("blt_id"));
             } else {
                 return BeanLoad.Null;
             }
@@ -62,11 +63,7 @@ public class BeanLoad extends AbstractItem {
             int count = res2.getInt(1);
             BeanLoad[] AllCategories = new BeanLoad[count];
             ResultSet res = stmt.executeQuery("SELECT * FROM beanload;");
-            for (int i = 0; i < count; i++) {
-                res.next();
-                AllCategories[i] = new BeanLoad(res.getInt("blID"), res.getString("blName"), res.getInt("beanID"), res.getInt("bltID"));
-            }
-            return AllCategories;
+            return getBeanLoads(count, AllCategories, res);
         } catch (Exception e) {
             System.err.println("Failed to load beanloads from Xanda Labs Database: " + e);
             e.printStackTrace(System.err);
@@ -75,19 +72,23 @@ public class BeanLoad extends AbstractItem {
         }
     }
 
+    private static BeanLoad[] getBeanLoads(int count, BeanLoad[] allCategories, ResultSet res) throws SQLException {
+        for (int i = 0; i < count; i++) {
+            res.next();
+            allCategories[i] = new BeanLoad(res.getInt("bl_id"), res.getString("bl_name"), res.getInt("bean_id"), res.getInt("blt_id"));
+        }
+        return allCategories;
+    }
+
     public static BeanLoad[] loadByBeanID(int beanID, Connection con) {
         try {
             Statement stmt = con.createStatement();
-            ResultSet res2 = stmt.executeQuery("SELECT COUNT(*) FROM beanload WHERE beanID='" + beanID + "';");
+            ResultSet res2 = stmt.executeQuery("SELECT COUNT(*) FROM beanload WHERE bean_id='" + beanID + "';");
             res2.next();
             int count = res2.getInt(1);
             BeanLoad[] AllCategories = new BeanLoad[count];
-            ResultSet res = stmt.executeQuery("SELECT * FROM beanload WHERE beanID='" + beanID + "';");
-            for (int i = 0; i < count; i++) {
-                res.next();
-                AllCategories[i] = new BeanLoad(res.getInt("blID"), res.getString("blName"), res.getInt("beanID"), res.getInt("bltID"));
-            }
-            return AllCategories;
+            ResultSet res = stmt.executeQuery("SELECT * FROM beanload WHERE bean_id='" + beanID + "';");
+            return getBeanLoads(count, AllCategories, res);
         } catch (Exception e) {
             System.err.println("Failed to load beanloads by beanID from Xanda Labs Database: " + e);
             e.printStackTrace(System.err);
@@ -99,7 +100,7 @@ public class BeanLoad extends AbstractItem {
     public boolean save(Connection con) {
         try {
             Statement stmt = con.createStatement();
-            int updater = stmt.executeUpdate("UPDATE beanload SET blName  =  '" + blName + "', beanID  =  '" + beanID + "', bltID  =  '" + bltID + "' WHERE blID  =  '" + blID + "';");
+            int updater = stmt.executeUpdate("UPDATE beanload SET bl_name  =  '" + blName + "', bean_id  =  '" + beanID + "', blt_id  =  '" + bltID + "' WHERE bl_id  =  '" + blID + "';");
             return true;
         } catch (Exception e) {
             System.err.println("Error in saving updates to beanload from Xanda Labs Database: " + e);
@@ -111,7 +112,7 @@ public class BeanLoad extends AbstractItem {
     public boolean delete(int blID, Connection con) {
         try {
             Statement stmt = con.createStatement();
-            int updater = stmt.executeUpdate("DELETE FROM beanload WHERE blID  =  '" + blID + "';");
+            int updater = stmt.executeUpdate("DELETE FROM beanload WHERE bl_id  =  '" + blID + "';");
             return true;
         } catch (Exception e) {
             System.err.println("Error in deleting beanload from Xanda Labs Database: " + e);

@@ -1,24 +1,46 @@
 package net.xanda.autobeancreator.servlet;
 
 import net.xanda.autobeancreator.servlet.util.DateConverter;
+import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.transform.Result;
-import javax.xml.transform.Source;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
-import java.io.File;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
+
+class XsltURIResolver implements URIResolver {
+    protected Logger logger = Logger.getLogger(MyXSLProc.class);
+    @Override
+    public Source resolve(String href, String base) throws TransformerException {
+        try{
+
+            InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(href);
+            logger.debug(">>>>>>>>>>" +  href);
+            return new StreamSource(inputStream);
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+            return null;
+        }
+    }
+}
 
 public class MyXSLProc {
-    public void process(HttpServletRequest request, HttpServletResponse response, String xsl, Document inDOM) throws ServletException, IOException {
+
+    protected Logger logger = Logger.getLogger(MyXSLProc.class);
+
+    public void process(HttpServletRequest request, ServletContext servletContext, HttpServletResponse response, String xsl, Document inDOM) throws ServletException, IOException {
+
 
         if (xsl == null) {
             throw new ServletException("Missing stylesheet");
@@ -27,12 +49,18 @@ public class MyXSLProc {
         try {
 
             //File xmlFile = new File(xml);
-            File xslFile = new File(xsl);
+            logger.info(">>>>>>>> resource: " + xsl);
+            InputStream inStream = servletContext.getResourceAsStream(xsl);
+            BufferedReader in = new BufferedReader(new InputStreamReader(inStream));
+
+            /* File xslFile = new File(xsl);*/
             response.setContentType("text/html");
             Source xmlSource = new DOMSource(inDOM);
-            Source xslSource = new StreamSource(xslFile);
+            Source xslSource = new StreamSource(inStream);
             Result result = new StreamResult(response.getWriter());
             TransformerFactory transFact = TransformerFactory.newInstance();
+
+            transFact.setURIResolver(new XsltURIResolver());
             Transformer trans = transFact.newTransformer(xslSource);
             trans.transform(xmlSource, result);
             System.err.println("[" + DateConverter.getRawDateAndTime() + "] XSL XANDAlabs loaded " + xsl);

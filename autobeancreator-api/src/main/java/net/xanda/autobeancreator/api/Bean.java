@@ -28,7 +28,7 @@ public class Bean extends AbstractItem {
         try {
             Statement stmt = con.createStatement();
             int updater = stmt.executeUpdate("INSERT INTO bean VALUES('', '" + beanName + "', '" + projID + "', '" + friendlyName + "');");
-            ResultSet res = stmt.executeQuery("SELECT beanID FROM bean WHERE beanName='" + beanName + "' AND projID='" + projID + "' AND friendlyName='" + friendlyName + "';");
+            ResultSet res = stmt.executeQuery("SELECT bean_id FROM bean WHERE bean_name='" + beanName + "' AND proj_id='" + projID + "' AND friendly_name='" + friendlyName + "';");
             res.next();
             return res.getInt(1);
         } catch (Exception e) {
@@ -41,9 +41,9 @@ public class Bean extends AbstractItem {
     public static Bean loadByID(int beanID, Connection con) {
         try {
             Statement stmt = con.createStatement();
-            ResultSet res = stmt.executeQuery("SELECT * FROM bean WHERE beanID = '" + beanID + "';");
+            ResultSet res = stmt.executeQuery("SELECT * FROM bean WHERE bean_id = '" + beanID + "';");
             if (res.next()) {
-                return new Bean(res.getInt("beanID"), res.getString("beanName"), res.getInt("projID"), res.getString("friendlyName"));
+                return new Bean(res.getInt("bean_id"), res.getString("bean_name"), res.getInt("proj_id"), res.getString("friendly_name"));
             } else {
                 return Bean.Null;
             }
@@ -61,10 +61,10 @@ public class Bean extends AbstractItem {
             res2.next();
             int count = res2.getInt(1);
             Bean[] AllCategories = new Bean[count];
-            ResultSet res = stmt.executeQuery("SELECT * FROM bean ORDER BY beanName;");
+            ResultSet res = stmt.executeQuery("SELECT * FROM bean ORDER BY bean_name;");
             for (int i = 0; i < count; i++) {
                 res.next();
-                AllCategories[i] = new Bean(res.getInt("beanID"), res.getString("beanName"), res.getInt("projID"), res.getString("friendlyName"));
+                AllCategories[i] = new Bean(res.getInt("bean_id"), res.getString("bean_name"), res.getInt("proj_id"), res.getString("friendly_name"));
             }
             return AllCategories;
         } catch (Exception e) {
@@ -78,7 +78,7 @@ public class Bean extends AbstractItem {
     public boolean save(Connection con) {
         try {
             Statement stmt = con.createStatement();
-            int updater = stmt.executeUpdate("UPDATE bean SET beanName  =  '" + beanName + "', projID  =  '" + projID + "', friendlyName  =  '" + friendlyName + "' WHERE beanID  =  '" + beanID + "';");
+            int updater = stmt.executeUpdate("UPDATE bean SET bean_name  =  '" + beanName + "', proj_id  =  '" + projID + "', friendly_name  =  '" + friendlyName + "' WHERE bean_id  =  '" + beanID + "';");
             return true;
         } catch (Exception e) {
             System.err.println("Error in saving updates to bean from Xanda Labs Database: " + e);
@@ -90,7 +90,7 @@ public class Bean extends AbstractItem {
     public boolean delete(int beanID, Connection con) {
         try {
             Statement stmt = con.createStatement();
-            int updater = stmt.executeUpdate("DELETE FROM bean WHERE beanID  =  '" + beanID + "';");
+            int updater = stmt.executeUpdate("DELETE FROM bean WHERE bean_id  =  '" + beanID + "';");
             return true;
         } catch (Exception e) {
             System.err.println("Error in deleting bean from Xanda Labs Database: " + e);

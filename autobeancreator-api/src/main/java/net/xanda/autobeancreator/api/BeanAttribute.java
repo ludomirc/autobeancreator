@@ -5,6 +5,7 @@ import org.w3c.dom.Element;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 public class BeanAttribute extends AbstractItem {
@@ -38,7 +39,7 @@ public class BeanAttribute extends AbstractItem {
         try {
             Statement stmt = con.createStatement();
             int updater = stmt.executeUpdate("INSERT INTO beanattribute VALUES('', '" + beanAttName + "', '" + beanID + "', '" + attTypeID + "', '" + formHidden + "', '" + primaryKey + "', '" + compolsoryField + "', '" + friendlyName + "', '" + order + "');");
-            ResultSet res = stmt.executeQuery("SELECT beanAttID FROM beanattribute WHERE beanAttName='" + beanAttName + "' AND beanID='" + beanID + "' AND attTypeID='" + attTypeID + "' AND formHidden='" + formHidden + "' AND primaryKey='" + primaryKey + "' AND compolsoryField='" + compolsoryField + "' AND friendlyName='" + friendlyName + "' AND order='" + order + "';");
+            ResultSet res = stmt.executeQuery("SELECT bean_att_id FROM beanattribute WHERE bean_att_name='" + beanAttName + "' AND bean_id='" + beanID + "' AND att_type_id='" + attTypeID + "' AND form_hidden='" + formHidden + "' AND primary_key='" + primaryKey + "' AND compolsory_field='" + compolsoryField + "' AND friendly_name='" + friendlyName + "' AND order='" + order + "';");
             res.next();
             return res.getInt(1);
         } catch (Exception e) {
@@ -51,9 +52,9 @@ public class BeanAttribute extends AbstractItem {
     public static BeanAttribute loadByID(int beanAttID, Connection con) {
         try {
             Statement stmt = con.createStatement();
-            ResultSet res = stmt.executeQuery("SELECT * FROM beanattribute WHERE beanAttID = '" + beanAttID + "';");
+            ResultSet res = stmt.executeQuery("SELECT * FROM beanattribute WHERE bean_att_id = '" + beanAttID + "';");
             if (res.next()) {
-                return new BeanAttribute(res.getInt("beanAttID"), res.getString("beanAttName"), res.getInt("beanID"), res.getInt("attTypeID"), res.getInt("formHidden"), res.getInt("primaryKey"), res.getInt("compolsoryField"), res.getString("friendlyName"), res.getInt("order"));
+                return new BeanAttribute(res.getInt("bean_att_id"), res.getString("bean_att_name"), res.getInt("bean_id"), res.getInt("att_type_id"), res.getInt("form_hidden"), res.getInt("primary_key"), res.getInt("compolsory_field"), res.getString("friendly_name"), res.getInt("order"));
             } else {
                 return BeanAttribute.Null;
             }
@@ -72,11 +73,7 @@ public class BeanAttribute extends AbstractItem {
             int count = res2.getInt(1);
             BeanAttribute[] AllCategories = new BeanAttribute[count];
             ResultSet res = stmt.executeQuery("SELECT * FROM beanattribute;");
-            for (int i = 0; i < count; i++) {
-                res.next();
-                AllCategories[i] = new BeanAttribute(res.getInt("beanAttID"), res.getString("beanAttName"), res.getInt("beanID"), res.getInt("attTypeID"), res.getInt("formHidden"), res.getInt("primaryKey"), res.getInt("compolsoryField"), res.getString("friendlyName"), res.getInt("order"));
-            }
-            return AllCategories;
+            return getBeanAttributes(count, AllCategories, res);
         } catch (Exception e) {
             System.err.println("Failed to load beanattributes from Xanda Labs Database: " + e);
             e.printStackTrace(System.err);
@@ -85,19 +82,23 @@ public class BeanAttribute extends AbstractItem {
         }
     }
 
+    private static BeanAttribute[] getBeanAttributes(int count, BeanAttribute[] allCategories, ResultSet res) throws SQLException {
+        for (int i = 0; i < count; i++) {
+            res.next();
+            allCategories[i] = new BeanAttribute(res.getInt("bean_att_id"), res.getString("bean_att_name"), res.getInt("bean_id"), res.getInt("att_type_id"), res.getInt("form_hidden"), res.getInt("primary_key"), res.getInt("compolsory_field"), res.getString("friendly_name"), res.getInt("order"));
+        }
+        return allCategories;
+    }
+
     public static BeanAttribute[] loadByBeanID(int beanID, Connection con) {
         try {
             Statement stmt = con.createStatement();
-            ResultSet res2 = stmt.executeQuery("SELECT COUNT(*) FROM beanattribute WHERE beanID='" + beanID + "';");
+            ResultSet res2 = stmt.executeQuery("SELECT COUNT(*) FROM beanattribute WHERE bean_id='" + beanID + "';");
             res2.next();
             int count = res2.getInt(1);
             BeanAttribute[] AllCategories = new BeanAttribute[count];
-            ResultSet res = stmt.executeQuery("SELECT * FROM beanattribute WHERE beanID='" + beanID + "';");
-            for (int i = 0; i < count; i++) {
-                res.next();
-                AllCategories[i] = new BeanAttribute(res.getInt("beanAttID"), res.getString("beanAttName"), res.getInt("beanID"), res.getInt("attTypeID"), res.getInt("formHidden"), res.getInt("primaryKey"), res.getInt("compolsoryField"), res.getString("friendlyName"), res.getInt("order"));
-            }
-            return AllCategories;
+            ResultSet res = stmt.executeQuery("SELECT * FROM beanattribute WHERE bean_id='" + beanID + "';");
+            return getBeanAttributes(count, AllCategories, res);
         } catch (Exception e) {
             System.err.println("Failed to load beanattributes from Xanda Labs Database: " + e);
             e.printStackTrace(System.err);
@@ -109,7 +110,7 @@ public class BeanAttribute extends AbstractItem {
     public boolean save(Connection con) {
         try {
             Statement stmt = con.createStatement();
-            int updater = stmt.executeUpdate("UPDATE beanattribute SET beanAttName  =  '" + beanAttName + "', beanID  =  '" + beanID + "', attTypeID  =  '" + attTypeID + "', formHidden  =  '" + formHidden + "', primaryKey  =  '" + primaryKey + "', compolsoryField  =  '" + compolsoryField + "', friendlyName  =  '" + friendlyName + "' , order  =  '" + order + "' WHERE beanAttID  =  '" + beanAttID + "';");
+            int updater = stmt.executeUpdate("UPDATE beanattribute SET beanAttName  =  '" + beanAttName + "', bean_id  =  '" + beanID + "', att_type_id  =  '" + attTypeID + "', form_hidden  =  '" + formHidden + "', primary_key  =  '" + primaryKey + "', compolsory_field  =  '" + compolsoryField + "', friendly_name  =  '" + friendlyName + "' , order  =  '" + order + "' WHERE bean_att_id  =  '" + beanAttID + "';");
             return true;
         } catch (Exception e) {
             System.err.println("Error in saving updates to beanattribute from Xanda Labs Database: " + e);

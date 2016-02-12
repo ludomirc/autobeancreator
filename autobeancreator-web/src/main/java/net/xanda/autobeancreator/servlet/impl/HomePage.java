@@ -3,6 +3,7 @@ package net.xanda.autobeancreator.servlet.impl;
 import net.xanda.autobeancreator.api.AbstractItem;
 import net.xanda.autobeancreator.servlet.AbstractPage;
 import net.xanda.autobeancreator.servlet.MyXSLProc;
+import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -14,9 +15,10 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.IOException;
 
-@WebServlet("/homepage")
+@WebServlet("/HomePage")
 public class HomePage extends AbstractPage {
 
+    protected Logger logger = Logger.getLogger(HomePage.class);
 
     public void doRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AbstractItem[] outItems = {};
@@ -26,16 +28,9 @@ public class HomePage extends AbstractPage {
         Element root = myGroupsDOM.getDocumentElement();
         MyXSLProc xslProc = new MyXSLProc();
 
-        xslProc.process(request, response, XSLLocation + "XANDALabs-HomePage.xsl", myGroupsDOM);
-        return;
-    }
+        logger.info(">>>>>>>> XSLLocation: " + XSLLocation);
+        xslProc.process(request,getServletContext(), response, XSLLocation + "XANDALabs-HomePage.xsl", myGroupsDOM);
 
-    public void doRequest(HttpServletRequest request,HttpServletResponse response, String reason) throws ServletException, IOException {
-        AbstractItem[] outItems = {};
-        Document myGroupsDOM = createDom(outItems, "");
-        Element root = myGroupsDOM.getDocumentElement();
-        MyXSLProc xslProc = new MyXSLProc();
-        xslProc.process(request, response, XSLLocation + "XANDALabs-HomePage.xsl", myGroupsDOM);
         return;
     }
 

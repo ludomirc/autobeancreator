@@ -5,6 +5,7 @@ import org.w3c.dom.Element;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 public class BeanLoadAttribute extends AbstractItem {
@@ -26,7 +27,7 @@ public class BeanLoadAttribute extends AbstractItem {
         try {
             Statement stmt = con.createStatement();
             int updater = stmt.executeUpdate("INSERT INTO beanloadattribute VALUES('', '" + beanAttID + "', '" + blID + "');");
-            ResultSet res = stmt.executeQuery("SELECT blattID FROM beanloadattribute WHERE beanAttID='" + beanAttID + "' AND blID='" + blID + "';");
+            ResultSet res = stmt.executeQuery("SELECT blatt_id FROM beanloadattribute WHERE bean_att_id='" + beanAttID + "' AND bl_id='" + blID + "';");
             res.next();
             return res.getInt(1);
         } catch (Exception e) {
@@ -60,17 +61,21 @@ public class BeanLoadAttribute extends AbstractItem {
             int count = res2.getInt(1);
             BeanLoadAttribute[] AllCategories = new BeanLoadAttribute[count];
             ResultSet res = stmt.executeQuery("SELECT * FROM beanloadattribute;");
-            for (int i = 0; i < count; i++) {
-                res.next();
-                AllCategories[i] = new BeanLoadAttribute(res.getInt("blattID"), res.getInt("beanAttID"), res.getInt("blID"));
-            }
-            return AllCategories;
+            return getBeanLoadAttributes(count, AllCategories, res);
         } catch (Exception e) {
             System.err.println("Failed to load beanloadattributes from Xanda Labs Database: " + e);
             e.printStackTrace(System.err);
             BeanLoadAttribute[] empty = new BeanLoadAttribute[0];
             return empty;
         }
+    }
+
+    private static BeanLoadAttribute[] getBeanLoadAttributes(int count, BeanLoadAttribute[] allCategories, ResultSet res) throws SQLException {
+        for (int i = 0; i < count; i++) {
+            res.next();
+            allCategories[i] = new BeanLoadAttribute(res.getInt("blattID"), res.getInt("beanAttID"), res.getInt("blID"));
+        }
+        return allCategories;
     }
 
     public static BeanLoadAttribute[] loadByBeanLoadID(int blID, Connection con) {
@@ -81,11 +86,7 @@ public class BeanLoadAttribute extends AbstractItem {
             int count = res2.getInt(1);
             BeanLoadAttribute[] AllCategories = new BeanLoadAttribute[count];
             ResultSet res = stmt.executeQuery("SELECT * FROM beanloadattribute WHERE blID='" + blID + "';");
-            for (int i = 0; i < count; i++) {
-                res.next();
-                AllCategories[i] = new BeanLoadAttribute(res.getInt("blattID"), res.getInt("beanAttID"), res.getInt("blID"));
-            }
-            return AllCategories;
+            return getBeanLoadAttributes(count, AllCategories, res);
         } catch (Exception e) {
             System.err.println("Failed to load beanloadattributes by blID from Xanda Labs Database: " + e);
             e.printStackTrace(System.err);

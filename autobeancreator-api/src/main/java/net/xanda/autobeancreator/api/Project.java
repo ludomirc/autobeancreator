@@ -24,7 +24,7 @@ public class Project extends AbstractItem {
         try {
             Statement stmt = con.createStatement();
             int updater = stmt.executeUpdate("INSERT INTO project VALUES('', '" + projName + "');");
-            ResultSet res = stmt.executeQuery("SELECT projID FROM project WHERE projName='" + projName + "';");
+            ResultSet res = stmt.executeQuery("SELECT proj_id FROM project WHERE proj_name='" + projName + "';");
             res.next();
             return res.getInt(1);
         } catch (Exception e) {
@@ -37,9 +37,9 @@ public class Project extends AbstractItem {
     public static Project loadByID(int projID, Connection con) {
         try {
             Statement stmt = con.createStatement();
-            ResultSet res = stmt.executeQuery("SELECT * FROM project WHERE projID = '" + projID + "';");
+            ResultSet res = stmt.executeQuery("SELECT * FROM project WHERE proj_id = '" + projID + "';");
             if (res.next()) {
-                return new Project(res.getInt("projID"), res.getString("projName"));
+                return new Project(res.getInt("proj_id"), res.getString("proj_name"));
             } else {
                 return Project.Null;
             }
@@ -57,10 +57,10 @@ public class Project extends AbstractItem {
             res2.next();
             int count = res2.getInt(1);
             Project[] AllCategories = new Project[count];
-            ResultSet res = stmt.executeQuery("SELECT * FROM project ORDER BY projName;");
+            ResultSet res = stmt.executeQuery("SELECT * FROM project ORDER BY proj_name;");
             for (int i = 0; i < count; i++) {
                 res.next();
-                AllCategories[i] = new Project(res.getInt("projID"), res.getString("projName"));
+                AllCategories[i] = new Project(res.getInt("proj_id"), res.getString("proj_name"));
             }
             return AllCategories;
         } catch (Exception e) {
@@ -74,7 +74,7 @@ public class Project extends AbstractItem {
     public boolean save(Connection con) {
         try {
             Statement stmt = con.createStatement();
-            int updater = stmt.executeUpdate("UPDATE project SET projName  =  '" + projName + "' WHERE projID  =  '" + projID + "';");
+            int updater = stmt.executeUpdate("UPDATE project SET proj_name  =  '" + projName + "' WHERE proj_id  =  '" + projID + "';");
             return true;
         } catch (Exception e) {
             System.err.println("Error in saving updates to project from Xanda Labs Database: " + e);
@@ -86,7 +86,7 @@ public class Project extends AbstractItem {
     public boolean delete(int projID, Connection con) {
         try {
             Statement stmt = con.createStatement();
-            int updater = stmt.executeUpdate("DELETE FROM project WHERE projID  =  '" + projID + "';");
+            int updater = stmt.executeUpdate("DELETE FROM project WHERE proj_id  =  '" + projID + "';");
             return true;
         } catch (Exception e) {
             System.err.println("Error in deleting project from Xanda Labs Database: " + e);

@@ -22,7 +22,7 @@ public abstract class AbstractPage extends HttpServlet {
     protected Connection con = null;
     protected HttpSession sessionID = null;
     protected boolean nosessionID = false;
-    protected String XSLLocation = "/home/httpd/vhosts/hostings.co.uk/private/xsl/xandalabs/";
+    protected String XSLLocation = "/WEB-INF/classes/";
 
     public boolean handlesessionID(HttpServletRequest request,
                                    HttpServletResponse response) throws IOException, ServletException {
@@ -108,7 +108,7 @@ public abstract class AbstractPage extends HttpServlet {
         try {
             Class.forName("org.gjt.mm.mysql.Driver").newInstance();
             out = DriverManager
-                    .getConnection("jdbc:mysql://localhost/xandalabs?user=xandalabs&&password=xxxxxx");
+                    .getConnection("jdbc:mysql://localhost/xandalabs?user=xandalabs&&password=xandalabs");
             System.out.println(">> Connected to XANDAlabs Database");
         } catch (Exception e) {
             System.out.println("Connection error: " + e.toString());

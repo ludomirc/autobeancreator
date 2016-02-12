@@ -25,11 +25,18 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
-
+        <!-- db connector dependency-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <scope>compile</scope>
+        </dependency>
+
+        <!-- logger dependency -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
         </dependency>
 
         <!-- JEE servlet dependency -->

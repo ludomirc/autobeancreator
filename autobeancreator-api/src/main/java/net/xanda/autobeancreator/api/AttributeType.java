@@ -24,7 +24,7 @@ public class AttributeType extends AbstractItem {
         try {
             Statement stmt = con.createStatement();
             int updater = stmt.executeUpdate("INSERT INTO attributetype VALUES('', '" + attName + "');");
-            ResultSet res = stmt.executeQuery("SELECT attTypeID FROM attributetype WHERE attName='" + attName + "';");
+            ResultSet res = stmt.executeQuery("SELECT att_type_id FROM attributetype WHERE att_name='" + attName + "';");
             res.next();
             return res.getInt(1);
         } catch (Exception e) {
@@ -37,7 +37,7 @@ public class AttributeType extends AbstractItem {
     public static AttributeType loadByID(int attTypeID, Connection con) {
         try {
             Statement stmt = con.createStatement();
-            ResultSet res = stmt.executeQuery("SELECT * FROM attributetype WHERE attTypeID = '" + attTypeID + "';");
+            ResultSet res = stmt.executeQuery("SELECT * FROM attributetype WHERE att_type_id = '" + attTypeID + "';");
             if (res.next()) {
                 return new AttributeType(res.getInt("attTypeID"), res.getString("attName"));
             } else {
@@ -57,10 +57,10 @@ public class AttributeType extends AbstractItem {
             res2.next();
             int count = res2.getInt(1);
             AttributeType[] AllCategories = new AttributeType[count];
-            ResultSet res = stmt.executeQuery("SELECT * FROM attributetype ORDER BY attName;");
+            ResultSet res = stmt.executeQuery("SELECT * FROM attributetype ORDER BY att_name;");
             for (int i = 0; i < count; i++) {
                 res.next();
-                AllCategories[i] = new AttributeType(res.getInt("attTypeID"), res.getString("attName"));
+                AllCategories[i] = new AttributeType(res.getInt("att_type_id"), res.getString("att_name"));
             }
             return AllCategories;
         } catch (Exception e) {
@@ -74,7 +74,7 @@ public class AttributeType extends AbstractItem {
     public boolean save(Connection con) {
         try {
             Statement stmt = con.createStatement();
-            int updater = stmt.executeUpdate("UPDATE attributetype SET attName  =  '" + attName + "' WHERE attTypeID  =  '" + attTypeID + "';");
+            int updater = stmt.executeUpdate("UPDATE attributetype SET att_name  =  '" + attName + "' WHERE att_type_id  =  '" + attTypeID + "';");
             return true;
         } catch (Exception e) {
             System.err.println("Error in saving updates to attributetype from Xanda Labs Database: " + e);
@@ -86,7 +86,7 @@ public class AttributeType extends AbstractItem {
     public boolean delete(int attTypeID, Connection con) {
         try {
             Statement stmt = con.createStatement();
-            int updater = stmt.executeUpdate("DELETE FROM attributetype WHERE attTypeID  =  '" + attTypeID + "';");
+            int updater = stmt.executeUpdate("DELETE FROM attributetype WHERE att_type_id  =  '" + attTypeID + "';");
             return true;
         } catch (Exception e) {
             System.err.println("Error in deleting attributetype from Xanda Labs Database: " + e);
