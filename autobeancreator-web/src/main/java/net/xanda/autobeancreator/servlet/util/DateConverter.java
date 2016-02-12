@@ -16,9 +16,6 @@ public class DateConverter {
     public static String convertDateToDayWithEnding(String rawDate) {
         try {
 
-            String longDate = "";
-            String longDay = "";
-            String longMonth = "";
             StringTokenizer tok = new StringTokenizer(rawDate, "-");
             String year = tok.nextToken();
             String month = tok.nextToken();
@@ -459,6 +456,12 @@ public class DateConverter {
         String dateOutFormatted;
         SimpleDateFormat formatter;
         formatter = new SimpleDateFormat("yyyy");
+        return getToday(formatter);
+    }
+
+    private static String getToday(SimpleDateFormat formatter) {
+        java.util.Date today;
+        String dateOutFormatted;
         today = new java.util.Date();
         dateOutFormatted = formatter.format(today);
         return dateOutFormatted;
