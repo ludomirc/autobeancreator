@@ -4,7 +4,6 @@ import net.xanda.autobeancreator.servlet.util.DateConverter;
 import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,7 +38,7 @@ public class MyXSLProc {
 
     protected Logger logger = Logger.getLogger(MyXSLProc.class);
 
-    public void process(HttpServletRequest request, ServletContext servletContext, HttpServletResponse response, String xsl, Document inDOM) throws ServletException, IOException {
+    public void process(HttpServletRequest request, HttpServletResponse response, String xsl, Document inDOM) throws ServletException, IOException {
 
 
         if (xsl == null) {
@@ -50,7 +49,7 @@ public class MyXSLProc {
 
             //File xmlFile = new File(xml);
             logger.info(">>>>>>>> resource: " + xsl);
-            InputStream inStream = servletContext.getResourceAsStream(xsl);
+            InputStream inStream = request.getServletContext().getResourceAsStream(xsl);
             BufferedReader in = new BufferedReader(new InputStreamReader(inStream));
 
             /* File xslFile = new File(xsl);*/

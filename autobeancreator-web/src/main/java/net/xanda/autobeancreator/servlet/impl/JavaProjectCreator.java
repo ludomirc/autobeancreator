@@ -3,7 +3,6 @@ package net.xanda.autobeancreator.servlet.impl;
 import net.xanda.autobeancreator.api.*;
 import net.xanda.autobeancreator.servlet.AbstractPage;
 import net.xanda.autobeancreator.servlet.MyXSLProc;
-import net.xanda.autobeancreator.servlet.impl.HomePage;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -45,7 +44,7 @@ public class JavaProjectCreator extends AbstractPage {
 
             MyXSLProc xslProc = new MyXSLProc();
 
-            xslProc.process(request,getServletContext(), response, XSLLocation + "JavaProjectCreator-CreateBean.xsl", doc);
+            xslProc.process(request,response, XSLLocation + "JavaProjectCreator-CreateBean.xsl", doc);
 
             try {
                 con.close();
@@ -66,7 +65,7 @@ public class JavaProjectCreator extends AbstractPage {
 
             MyXSLProc xslProc = new MyXSLProc();
 
-            xslProc.process(request,getServletContext(), response, XSLLocation + "JavaProjectCreator-CreateServlet.xsl", doc);
+            xslProc.process(request,response, XSLLocation + "JavaProjectCreator-CreateServlet.xsl", doc);
 
             try {
                 con.close();
@@ -87,7 +86,7 @@ public class JavaProjectCreator extends AbstractPage {
 
             MyXSLProc xslProc = new MyXSLProc();
 
-            xslProc.process(request,getServletContext(), response, XSLLocation + "JavaProjectCreator-CreateXSL.xsl", doc);
+            xslProc.process(request,response, XSLLocation + "JavaProjectCreator-CreateXSL.xsl", doc);
 
             try {
                 con.close();
