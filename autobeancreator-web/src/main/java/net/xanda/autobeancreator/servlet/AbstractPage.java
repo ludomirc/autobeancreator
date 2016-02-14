@@ -71,7 +71,7 @@ public abstract class AbstractPage extends HttpServlet {
             throws IOException, ServletException {
         doRequest(request, response);
     }
-
+    public abstract void doRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException;
     /**
      * The doRequest method checks that the function is NOT null, if it is the
      * user is taken to the login page. It then checks the validity of the
@@ -79,7 +79,7 @@ public abstract class AbstractPage extends HttpServlet {
      * methods gets a connection to the database and returns, allowing page
      * classes which extend the AbstractPage class to complete requests
      */
-    public void doRequest(HttpServletRequest request,
+    /*public void doRequest(HttpServletRequest request,
                           HttpServletResponse response) throws IOException, ServletException { //HttpsessionID
         // sessionID
         // =
@@ -98,7 +98,7 @@ public abstract class AbstractPage extends HttpServlet {
         con = getConnection();
         nosessionID = false;
         return;
-    }
+    }*/
 
     /**
      * The getConnection method initialsies a connection to the SQL database
