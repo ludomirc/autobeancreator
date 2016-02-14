@@ -58,92 +58,37 @@ public class DateConverter {
         String year = tok.nextToken();
         String month = tok.nextToken();
         String day = tok.nextToken();
-        if (month.equals("01")) {
-            longMonth = "January";
-        } else {
-            if (month.equals("02")) {
-                longMonth = "February";
-            } else {
-                if (month.equals("03")) {
-                    longMonth = "March";
-                } else {
-                    if (month.equals("04")) {
-                        longMonth = "April";
-                    } else {
-                        if (month.equals("05")) {
-                            longMonth = "May";
-                        } else {
-                            if (month.equals("06")) {
-                                longMonth = "June";
-                            } else {
-                                if (month.equals("07")) {
-                                    longMonth = "July";
-                                } else {
-                                    if (month.equals("08")) {
-                                        longMonth = "August";
-                                    } else {
-                                        if (month.equals("09")) {
-                                            longMonth = "September";
-                                        } else {
-                                            if (month.equals("10")) {
-                                                longMonth = "October";
-                                            } else {
-                                                if (month.equals("11")) {
-                                                    longMonth = "November";
-                                                } else {
-                                                    if (month.equals("12")) {
-                                                        longMonth = "December";
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        if (day.equals("01")) {
-            longDay = "1";
-        } else {
-            if (day.equals("02")) {
-                longDay = "2";
-            } else {
-                if (day.equals("03")) {
-                    longDay = "3";
-                } else {
-                    if (day.equals("04")) {
-                        longDay = "4";
-                    } else {
-                        if (day.equals("05")) {
-                            longDay = "5";
-                        } else {
-                            if (day.equals("06")) {
-                                longDay = "6";
-                            } else {
-                                if (day.equals("07")) {
-                                    longDay = "7";
-                                } else {
-                                    if (day.equals("08")) {
-                                        longDay = "8";
-                                    } else {
-                                        if (day.equals("09")) {
-                                            longDay = "9";
-                                        } else {
-                                            longDay = day;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        longMonth = getLongMonth(month);
+
+        longDay = trimFirstZero(day);
         longDate = longDay + " " + longMonth + ", " + year;
         return longDate;
+    }
+
+    private static String trimFirstZero(String str) {
+        if (str == null) return str;
+
+        if (str.charAt(0) == '0') {
+            str = str.substring(1);
+        }
+        return str;
+    }
+
+    private static String getLongMonth(String month) {
+
+        String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        return geFromArr(month, months);
+    }
+
+
+    private static String getShortMonth(String month) {
+        String[] months = {"Jan", "Feb",  "Mar", "Apr","May","Jun", "Jul",  "Aug", "Sep", "Oct", "Nov","Dec"};
+        return geFromArr(month, months);
+    }
+
+    private static String geFromArr(String month, String[] months) {
+        int mnt = Integer.parseInt(trimFirstZero(month)) - 1;
+        return  months[mnt];
     }
 
     public static String convertRawDateMini(String rawDate) {
@@ -155,90 +100,8 @@ public class DateConverter {
         String year = tok.nextToken();
         String month = tok.nextToken();
         String day = tok.nextToken();
-        if (month.equals("01")) {
-            longMonth = "Jan";
-        } else {
-            if (month.equals("02")) {
-                longMonth = "Feb";
-            } else {
-                if (month.equals("03")) {
-                    longMonth = "Mar";
-                } else {
-                    if (month.equals("04")) {
-                        longMonth = "Apr";
-                    } else {
-                        if (month.equals("05")) {
-                            longMonth = "May";
-                        } else {
-                            if (month.equals("06")) {
-                                longMonth = "Jun";
-                            } else {
-                                if (month.equals("07")) {
-                                    longMonth = "Jul";
-                                } else {
-                                    if (month.equals("08")) {
-                                        longMonth = "Aug";
-                                    } else {
-                                        if (month.equals("09")) {
-                                            longMonth = "Sep";
-                                        } else {
-                                            if (month.equals("10")) {
-                                                longMonth = "Oct";
-                                            } else {
-                                                if (month.equals("11")) {
-                                                    longMonth = "Nov";
-                                                } else {
-                                                    if (month.equals("12")) {
-                                                        longMonth = "Dec";
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        if (day.equals("01")) {
-            longDay = "1";
-        } else {
-            if (day.equals("02")) {
-                longDay = "2";
-            } else {
-                if (day.equals("03")) {
-                    longDay = "3";
-                } else {
-                    if (day.equals("04")) {
-                        longDay = "4";
-                    } else {
-                        if (day.equals("05")) {
-                            longDay = "5";
-                        } else {
-                            if (day.equals("06")) {
-                                longDay = "6";
-                            } else {
-                                if (day.equals("07")) {
-                                    longDay = "7";
-                                } else {
-                                    if (day.equals("08")) {
-                                        longDay = "8";
-                                    } else {
-                                        if (day.equals("09")) {
-                                            longDay = "9";
-                                        } else {
-                                            longDay = day;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        longMonth = getShortMonth(month);
+        longDay = trimFirstZero(day);
         longDate = longDay + " " + longMonth + " " + year.substring(2);
         return longDate;
     }
@@ -265,90 +128,7 @@ public class DateConverter {
         String year = tok.nextToken();
         String month = tok.nextToken();
         String day = tok.nextToken();
-        if (month.equals("01")) {
-            longMonth = "January";
-        } else {
-            if (month.equals("02")) {
-                longMonth = "February";
-            } else {
-                if (month.equals("03")) {
-                    longMonth = "March";
-                } else {
-                    if (month.equals("04")) {
-                        longMonth = "April";
-                    } else {
-                        if (month.equals("05")) {
-                            longMonth = "May";
-                        } else {
-                            if (month.equals("06")) {
-                                longMonth = "June";
-                            } else {
-                                if (month.equals("07")) {
-                                    longMonth = "July";
-                                } else {
-                                    if (month.equals("08")) {
-                                        longMonth = "August";
-                                    } else {
-                                        if (month.equals("09")) {
-                                            longMonth = "September";
-                                        } else {
-                                            if (month.equals("10")) {
-                                                longMonth = "October";
-                                            } else {
-                                                if (month.equals("11")) {
-                                                    longMonth = "November";
-                                                } else {
-                                                    if (month.equals("12")) {
-                                                        longMonth = "December";
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        if (day.equals("01")) {
-            longDay = "1";
-        } else {
-            if (day.equals("02")) {
-                longDay = "2";
-            } else {
-                if (day.equals("03")) {
-                    longDay = "3";
-                } else {
-                    if (day.equals("04")) {
-                        longDay = "4";
-                    } else {
-                        if (day.equals("05")) {
-                            longDay = "5";
-                        } else {
-                            if (day.equals("06")) {
-                                longDay = "6";
-                            } else {
-                                if (day.equals("07")) {
-                                    longDay = "7";
-                                } else {
-                                    if (day.equals("08")) {
-                                        longDay = "8";
-                                    } else {
-                                        if (day.equals("09")) {
-                                            longDay = "9";
-                                        } else {
-                                            longDay = day;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        longMonth = getLongMonth(month);
         longDate = longMonth + ", " + year;
         return longDate;
     }
@@ -356,104 +136,17 @@ public class DateConverter {
     public static String convertRawDateMiniMonthYearOnly(String rawDate) {
 
         String longDate = "";
-        String longDay = "";
         String longMonth = "";
         StringTokenizer tok = new StringTokenizer(rawDate, "-");
         String year = tok.nextToken();
         String month = tok.nextToken();
-        String day = tok.nextToken();
-        if (month.equals("01")) {
-            longMonth = "Jan";
-        } else {
-            if (month.equals("02")) {
-                longMonth = "Feb";
-            } else {
-                if (month.equals("03")) {
-                    longMonth = "Mar";
-                } else {
-                    if (month.equals("04")) {
-                        longMonth = "Apr";
-                    } else {
-                        if (month.equals("05")) {
-                            longMonth = "May";
-                        } else {
-                            if (month.equals("06")) {
-                                longMonth = "Jun";
-                            } else {
-                                if (month.equals("07")) {
-                                    longMonth = "Jul";
-                                } else {
-                                    if (month.equals("08")) {
-                                        longMonth = "Aug";
-                                    } else {
-                                        if (month.equals("09")) {
-                                            longMonth = "Sep";
-                                        } else {
-                                            if (month.equals("10")) {
-                                                longMonth = "Oct";
-                                            } else {
-                                                if (month.equals("11")) {
-                                                    longMonth = "Nov";
-                                                } else {
-                                                    if (month.equals("12")) {
-                                                        longMonth = "Dec";
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        if (day.equals("01")) {
-            longDay = "1";
-        } else {
-            if (day.equals("02")) {
-                longDay = "2";
-            } else {
-                if (day.equals("03")) {
-                    longDay = "3";
-                } else {
-                    if (day.equals("04")) {
-                        longDay = "4";
-                    } else {
-                        if (day.equals("05")) {
-                            longDay = "5";
-                        } else {
-                            if (day.equals("06")) {
-                                longDay = "6";
-                            } else {
-                                if (day.equals("07")) {
-                                    longDay = "7";
-                                } else {
-                                    if (day.equals("08")) {
-                                        longDay = "8";
-                                    } else {
-                                        if (day.equals("09")) {
-                                            longDay = "9";
-                                        } else {
-                                            longDay = day;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        longMonth = getShortMonth(month);
         longDate = longMonth + " " + year.substring(2);
         return longDate;
     }
 
 
     public static String getYear() {
-        java.util.Date today;
-        String dateOutFormatted;
         SimpleDateFormat formatter;
         formatter = new SimpleDateFormat("yyyy");
         return getToday(formatter);
@@ -515,20 +208,8 @@ public class DateConverter {
         month = calendar.get(java.util.Calendar.MONTH) + 1;
         year = calendar.get(java.util.Calendar.YEAR);
 
-        String[] months = {"01", "02", "03", "04", "05", "06", "07", "08", "09"};
-        String[] days = {"01", "02", "03", "04", "05", "06", "07", "08", "09"};
-
-        if (day < 10) {
-            dayString = days[day - 1];
-        } else {
-            dayString = day + "";
-        }
-
-        if (month < 10) {
-            monthString = months[month - 1];
-        } else {
-            monthString = month + "";
-        }
+        dayString = addZeroPrefix(day);
+        monthString = addZeroPrefix(month);
 
         return year + "-" + monthString + "-" + dayString;
     }
@@ -548,20 +229,8 @@ public class DateConverter {
         month = calendar.get(java.util.Calendar.MONTH) + 1;
         year = calendar.get(java.util.Calendar.YEAR);
 
-        String[] months = {"01", "02", "03", "04", "05", "06", "07", "08", "09"};
-        String[] days = {"01", "02", "03", "04", "05", "06", "07", "08", "09"};
-
-        if (day < 10) {
-            dayString = days[day - 1];
-        } else {
-            dayString = day + "";
-        }
-
-        if (month < 10) {
-            monthString = months[month - 1];
-        } else {
-            monthString = month + "";
-        }
+        dayString = addZeroPrefix(day);
+        monthString = addZeroPrefix(month);
 
         return year + "-" + monthString + "-" + dayString;
     }
@@ -581,20 +250,8 @@ public class DateConverter {
         month = calendar.get(java.util.Calendar.MONTH) + 1;
         year = calendar.get(java.util.Calendar.YEAR);
 
-        String[] months = {"01", "02", "03", "04", "05", "06", "07", "08", "09"};
-        String[] days = {"01", "02", "03", "04", "05", "06", "07", "08", "09"};
-
-        if (day < 10) {
-            dayString = days[day - 1];
-        } else {
-            dayString = day + "";
-        }
-
-        if (month < 10) {
-            monthString = months[month - 1];
-        } else {
-            monthString = month + "";
-        }
+        dayString = addZeroPrefix(day);
+        monthString = addZeroPrefix(month);
 
         return year + "-" + monthString + "-" + dayString;
     }
@@ -614,22 +271,21 @@ public class DateConverter {
         month = calendar.get(java.util.Calendar.MONTH) + 1;
         year = calendar.get(java.util.Calendar.YEAR);
 
-        String[] months = {"01", "02", "03", "04", "05", "06", "07", "08", "09"};
-        String[] days = {"01", "02", "03", "04", "05", "06", "07", "08", "09"};
+        dayString = addZeroPrefix(day);
+        monthString = addZeroPrefix(month);
 
+        return year + "-" + monthString + "-" + dayString;
+    }
+
+    private static String addZeroPrefix(int day) {
+
+        String dayString;
         if (day < 10) {
-            dayString = days[day - 1];
+            dayString = "0" + day;
         } else {
             dayString = day + "";
         }
-
-        if (month < 10) {
-            monthString = months[month - 1];
-        } else {
-            monthString = month + "";
-        }
-
-        return year + "-" + monthString + "-" + dayString;
+        return dayString;
     }
 
     public static String get1YearAhead(String startDate) {
@@ -647,20 +303,8 @@ public class DateConverter {
         month = calendar.get(java.util.Calendar.MONTH) + 1;
         year = calendar.get(java.util.Calendar.YEAR);
 
-        String[] months = {"01", "02", "03", "04", "05", "06", "07", "08", "09"};
-        String[] days = {"01", "02", "03", "04", "05", "06", "07", "08", "09"};
-
-        if (day < 10) {
-            dayString = days[day - 1];
-        } else {
-            dayString = day + "";
-        }
-
-        if (month < 10) {
-            monthString = months[month - 1];
-        } else {
-            monthString = month + "";
-        }
+        dayString = addZeroPrefix(day);
+        monthString = addZeroPrefix(month);
 
         return year + "-" + monthString + "-" + dayString;
     }
