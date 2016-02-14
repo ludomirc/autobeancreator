@@ -1,6 +1,7 @@
 package net.xanda.autobeancreator.servlet.util;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.StringTokenizer;
 
@@ -117,12 +118,18 @@ public class DateConverter {
         return month;
     }
 
+
+    //!todo to remove
+    public static void main(String[] args) {
+        System.out.println(addZeroPrefix(10));
+    }
+
+
     public static String convertRawDateMonth(String rawDate) {
         if (rawDate.equals("")) {
             return "";
         }
         String longDate = "";
-        String longDay = "";
         String longMonth = "";
         StringTokenizer tok = new StringTokenizer(rawDate, "-");
         String year = tok.nextToken();
@@ -161,21 +168,20 @@ public class DateConverter {
     }
 
     public static String getMonth() {
-        java.util.Date today;
-        String dateOutFormatted;
-        SimpleDateFormat formatter;
-        formatter = new SimpleDateFormat("MM");
-        today = new java.util.Date();
-        dateOutFormatted = formatter.format(today);
-        // System.err.println("Setting message date as "+dateOutFormatted);
-        return dateOutFormatted;
+        return getDateComponent("MM");
     }
 
     public static String getDay() {
+        String format = "dd";
+
+        return getDateComponent(format);
+    }
+
+    private static String getDateComponent(String format) {
         java.util.Date today;
         String dateOutFormatted;
         SimpleDateFormat formatter;
-        formatter = new SimpleDateFormat("dd");
+        formatter = new SimpleDateFormat(format);
         today = new java.util.Date();
         dateOutFormatted = formatter.format(today);
         // System.err.println("Setting message date as "+dateOutFormatted);
@@ -183,38 +189,18 @@ public class DateConverter {
     }
 
     public static String getRawDate() {
-        java.util.Date today;
-        String dateOutFormatted;
-        SimpleDateFormat formatter;
-        formatter = new SimpleDateFormat("yyyy-MM-dd");
-        today = new java.util.Date();
-        dateOutFormatted = formatter.format(today);
-        //  System.err.println("Setting message date as "+dateOutFormatted);
-        return dateOutFormatted;
+        return getDateComponent("yyyy-MM-dd");
     }
 
     public static String get7DaysAhead(String startDate) {
-        StringTokenizer tok = new StringTokenizer(startDate, "-");
-        int year = Integer.parseInt(tok.nextToken());
-        int month = Integer.parseInt(tok.nextToken());
-        int day = Integer.parseInt(tok.nextToken());
-
-        GregorianCalendar calendar = new GregorianCalendar(year, month - 1, day);
-
-        String dayString = "";
-        String monthString = "";
-        calendar.add(java.util.Calendar.DAY_OF_MONTH, 7);
-        day = calendar.get(java.util.Calendar.DAY_OF_MONTH);
-        month = calendar.get(java.util.Calendar.MONTH) + 1;
-        year = calendar.get(java.util.Calendar.YEAR);
-
-        dayString = addZeroPrefix(day);
-        monthString = addZeroPrefix(month);
-
-        return year + "-" + monthString + "-" + dayString;
+        return addToData(startDate, 7,0,0);
     }
 
     public static String get14DaysPrevious(String startDate) {
+        return addToData(startDate, -14,0,0);
+    }
+
+    private static String addToData(String startDate, int days,int months,int years) {
         StringTokenizer tok = new StringTokenizer(startDate, "-");
         int year = Integer.parseInt(tok.nextToken());
         int month = Integer.parseInt(tok.nextToken());
@@ -224,7 +210,10 @@ public class DateConverter {
 
         String dayString = "";
         String monthString = "";
-        calendar.add(java.util.Calendar.DAY_OF_MONTH, -14);
+        calendar.add(java.util.Calendar.DAY_OF_MONTH, days);
+        calendar.add(java.util.Calendar.MONTH,months);
+        calendar.add(java.util.Calendar.YEAR, years);
+
         day = calendar.get(java.util.Calendar.DAY_OF_MONTH);
         month = calendar.get(java.util.Calendar.MONTH) + 1;
         year = calendar.get(java.util.Calendar.YEAR);
@@ -236,45 +225,11 @@ public class DateConverter {
     }
 
     public static String get1DayAhead(String startDate) {
-        StringTokenizer tok = new StringTokenizer(startDate, "-");
-        int year = Integer.parseInt(tok.nextToken());
-        int month = Integer.parseInt(tok.nextToken());
-        int day = Integer.parseInt(tok.nextToken());
-
-        GregorianCalendar calendar = new GregorianCalendar(year, month - 1, day);
-
-        String dayString = "";
-        String monthString = "";
-        calendar.add(java.util.Calendar.DAY_OF_MONTH, 1);
-        day = calendar.get(java.util.Calendar.DAY_OF_MONTH);
-        month = calendar.get(java.util.Calendar.MONTH) + 1;
-        year = calendar.get(java.util.Calendar.YEAR);
-
-        dayString = addZeroPrefix(day);
-        monthString = addZeroPrefix(month);
-
-        return year + "-" + monthString + "-" + dayString;
+        return addToData(startDate, 1,0,0);
     }
 
     public static String get1MonthAhead(String startDate) {
-        StringTokenizer tok = new StringTokenizer(startDate, "-");
-        int year = Integer.parseInt(tok.nextToken());
-        int month = Integer.parseInt(tok.nextToken());
-        int day = Integer.parseInt(tok.nextToken());
-
-        GregorianCalendar calendar = new GregorianCalendar(year, month - 1, day);
-
-        String dayString = "";
-        String monthString = "";
-        calendar.add(java.util.Calendar.MONTH, 1);
-        day = calendar.get(java.util.Calendar.DAY_OF_MONTH);
-        month = calendar.get(java.util.Calendar.MONTH) + 1;
-        year = calendar.get(java.util.Calendar.YEAR);
-
-        dayString = addZeroPrefix(day);
-        monthString = addZeroPrefix(month);
-
-        return year + "-" + monthString + "-" + dayString;
+        return addToData(startDate, 0,1,0);
     }
 
     private static String addZeroPrefix(int day) {
@@ -289,57 +244,19 @@ public class DateConverter {
     }
 
     public static String get1YearAhead(String startDate) {
-        StringTokenizer tok = new StringTokenizer(startDate, "-");
-        int year = Integer.parseInt(tok.nextToken());
-        int month = Integer.parseInt(tok.nextToken());
-        int day = Integer.parseInt(tok.nextToken());
-
-        GregorianCalendar calendar = new GregorianCalendar(year, month - 1, day);
-
-        String dayString = "";
-        String monthString = "";
-        calendar.add(java.util.Calendar.YEAR, 1);
-        day = calendar.get(java.util.Calendar.DAY_OF_MONTH);
-        month = calendar.get(java.util.Calendar.MONTH) + 1;
-        year = calendar.get(java.util.Calendar.YEAR);
-
-        dayString = addZeroPrefix(day);
-        monthString = addZeroPrefix(month);
-
-        return year + "-" + monthString + "-" + dayString;
+        return addToData(startDate, 0,0,1);
     }
 
     public static String getRawDateAndTime() {
-        java.util.Date today;
-        String dateOutFormatted;
-        SimpleDateFormat formatter;
-        formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        today = new java.util.Date();
-        dateOutFormatted = formatter.format(today);
-        //  System.err.println("Setting message date as "+dateOutFormatted);
-        return dateOutFormatted;
+        return getDateComponent("yyyy-MM-dd HH:mm:ss");
     }
 
     public static String getRawDateAndTimeForUpload() {
-        java.util.Date today;
-        String dateOutFormatted;
-        SimpleDateFormat formatter;
-        formatter = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
-        today = new java.util.Date();
-        dateOutFormatted = formatter.format(today);
-        //  System.err.println("Setting message date as "+dateOutFormatted);
-        return dateOutFormatted;
+        return getDateComponent("yyyy-MM-dd-HH-mm-ss");
     }
 
     public static String getRawTime() {
-        java.util.Date today;
-        String dateOutFormatted;
-        SimpleDateFormat formatter;
-        formatter = new SimpleDateFormat("HH:mm:ss");
-        today = new java.util.Date();
-        dateOutFormatted = formatter.format(today);
-        //  System.err.println("Setting message date as "+dateOutFormatted);
-        return dateOutFormatted;
+        return getDateComponent("HH:mm:ss");
     }
 
     public static String getWeekDay(String startDate) {
