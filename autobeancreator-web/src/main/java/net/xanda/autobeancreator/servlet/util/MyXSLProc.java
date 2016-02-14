@@ -15,7 +15,7 @@ import java.io.InputStream;
 
 
 class XsltURIResolver implements URIResolver {
-    protected Logger logger = Logger.getLogger(MyXSLProc.class);
+    private Logger logger = Logger.getLogger(MyXSLProc.class);
     @Override
     public Source resolve(String href, String base) throws TransformerException {
         try{
@@ -32,7 +32,7 @@ class XsltURIResolver implements URIResolver {
 
 public class MyXSLProc {
 
-    protected Logger logger = Logger.getLogger(MyXSLProc.class);
+    private Logger logger = Logger.getLogger(MyXSLProc.class);
 
     public void process(HttpServletRequest request,HttpServletResponse response, String xsl, Document inDOM) throws ServletException, IOException {
 
@@ -58,10 +58,10 @@ public class MyXSLProc {
 
             Transformer trans = transFact.newTransformer(xslSource);
             trans.transform(xmlSource, result);
-            System.err.println("[" + DateConverter.getRawDateAndTime() + "] XSL XANDAlabs loaded " + xsl);
+            logger.info("[" + DateConverter.getRawDateAndTime() + "] XSL XANDAlabs loaded " + xsl);
 
         } catch (Exception e) {
-            e.printStackTrace(System.err);
+            logger.error(System.err);
             throw new ServletException("MyXSLProc: " + e.toString());
 
         }
