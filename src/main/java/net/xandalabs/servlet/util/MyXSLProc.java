@@ -1,4 +1,4 @@
-package net.xanda.autobeancreator.servlet.util;
+package net.xandalabs.servlet.util;
 
 import org.apache.log4j.Logger;
 import org.w3c.dom.Document;

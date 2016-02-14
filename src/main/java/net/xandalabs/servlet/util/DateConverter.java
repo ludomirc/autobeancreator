@@ -1,4 +1,4 @@
-package net.xanda.autobeancreator.servlet.util;
+package net.xandalabs.servlet.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

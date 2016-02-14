@@ -1,4 +1,4 @@
-package net.xanda.autobeancreator.model;//import FieldFault;
+package net.xandalabs.model;//import FieldFault;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package net.xanda.autobeancreator.listener;
+package net.xandalabs.listener;
 
 import org.apache.log4j.PropertyConfigurator;
 

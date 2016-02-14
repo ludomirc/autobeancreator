@@ -1,4 +1,4 @@
-package net.xanda.autobeancreator.servlet.util;
+package net.xandalabs.servlet.util;
 
 /**
  * This class is our method of removing special characters that can acuse SQL errors during saving.

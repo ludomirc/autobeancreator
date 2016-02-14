@@ -1,6 +1,6 @@
-package net.xanda.autobeancreator.servlet;
+package net.xandalabs.servlet;
 
-import net.xanda.autobeancreator.model.AbstractItem;
+import net.xandalabs.model.AbstractItem;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 

@@ -1,18 +1,16 @@
-package net.xanda.autobeancreator.servlet.impl;
+package net.xandalabs.servlet.impl;
 
-import net.xanda.autobeancreator.model.AbstractItem;
-import net.xanda.autobeancreator.servlet.AbstractPage;
-import net.xanda.autobeancreator.servlet.util.MyXSLProc;
+import net.xandalabs.model.AbstractItem;
+import net.xandalabs.servlet.AbstractPage;
+import net.xandalabs.servlet.util.MyXSLProc;
 import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/HomePage")
 public class HomePage extends AbstractPage {
 
     protected Logger logger = Logger.getLogger(HomePage.class);

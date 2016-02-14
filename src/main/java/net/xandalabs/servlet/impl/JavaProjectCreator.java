@@ -1,8 +1,8 @@
-package net.xanda.autobeancreator.servlet.impl;
+package net.xandalabs.servlet.impl;
 
-import net.xanda.autobeancreator.model.*;
-import net.xanda.autobeancreator.servlet.AbstractPage;
-import net.xanda.autobeancreator.servlet.util.MyXSLProc;
+import net.xandalabs.servlet.AbstractPage;
+import net.xandalabs.servlet.util.MyXSLProc;
+import net.xandalabs.model.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
