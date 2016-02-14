@@ -1,4 +1,4 @@
-package net.xanda.autobeancreator.api;
+package net.xanda.autobeancreator.model;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
