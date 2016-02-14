@@ -22,7 +22,7 @@ public abstract class AbstractPage extends HttpServlet {
     protected Connection con = null;
     protected HttpSession sessionID = null;
     protected boolean nosessionID = false;
-    protected String XSLLocation = "/WEB-INF/classes/";
+    protected String XSLLocation = "/WEB-INF/classes/xsl/";
 
     public boolean handlesessionID(HttpServletRequest request,
                                    HttpServletResponse response) throws IOException, ServletException {

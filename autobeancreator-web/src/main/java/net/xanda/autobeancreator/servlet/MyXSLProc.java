@@ -11,10 +11,8 @@ import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 
 
 class XsltURIResolver implements URIResolver {
@@ -22,9 +20,8 @@ class XsltURIResolver implements URIResolver {
     @Override
     public Source resolve(String href, String base) throws TransformerException {
         try{
-
-            InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(href);
-            logger.debug(">>>>>>>>>>" +  href);
+            logger.debug(">>>>>>>>>> href" +  href);
+            InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream( "xsl/"+ href);
             return new StreamSource(inputStream);
         }
         catch(Exception ex){
@@ -38,7 +35,7 @@ public class MyXSLProc {
 
     protected Logger logger = Logger.getLogger(MyXSLProc.class);
 
-    public void process(HttpServletRequest request, HttpServletResponse response, String xsl, Document inDOM) throws ServletException, IOException {
+    public void process(HttpServletRequest request,HttpServletResponse response, String xsl, Document inDOM) throws ServletException, IOException {
 
 
         if (xsl == null) {
@@ -50,7 +47,6 @@ public class MyXSLProc {
             //File xmlFile = new File(xml);
             logger.info(">>>>>>>> resource: " + xsl);
             InputStream inStream = request.getServletContext().getResourceAsStream(xsl);
-            BufferedReader in = new BufferedReader(new InputStreamReader(inStream));
 
             /* File xslFile = new File(xsl);*/
             response.setContentType("text/html");
@@ -60,6 +56,7 @@ public class MyXSLProc {
             TransformerFactory transFact = TransformerFactory.newInstance();
 
             transFact.setURIResolver(new XsltURIResolver());
+
             Transformer trans = transFact.newTransformer(xslSource);
             trans.transform(xmlSource, result);
             System.err.println("[" + DateConverter.getRawDateAndTime() + "] XSL XANDAlabs loaded " + xsl);
