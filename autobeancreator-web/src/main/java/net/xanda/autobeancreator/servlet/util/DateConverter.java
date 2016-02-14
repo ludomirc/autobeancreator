@@ -118,13 +118,6 @@ public class DateConverter {
         return month;
     }
 
-
-    //!todo to remove
-    public static void main(String[] args) {
-        System.out.println(addZeroPrefix(10));
-    }
-
-
     public static String convertRawDateMonth(String rawDate) {
         if (rawDate.equals("")) {
             return "";
