@@ -13,13 +13,16 @@
                     <br/>
 
 
-                    <b>Bean Creation for
+                    //<b>Bean Creation for
                         <xsl:value-of select="//Bean/beanName"/>
                     </b>
                     <br/>
                     <br/>
                     <br/>
-
+                    import net.xandalabs.model.AbstractItem;
+                    <br/>
+                    import net.xandalabs.model.Validatable;
+                    <br/>
                     import java.sql.Connection;
                     <br/>
                     import java.sql.ResultSet;
