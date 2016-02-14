@@ -2,8 +2,7 @@ package net.xanda.autobeancreator.servlet.impl;
 
 import net.xanda.autobeancreator.api.*;
 import net.xanda.autobeancreator.servlet.AbstractPage;
-import net.xanda.autobeancreator.servlet.MyXSLProc;
-import net.xanda.autobeancreator.servlet.impl.HomePage;
+import net.xanda.autobeancreator.servlet.util.MyXSLProc;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 

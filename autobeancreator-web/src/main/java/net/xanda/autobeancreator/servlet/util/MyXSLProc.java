@@ -1,6 +1,5 @@
-package net.xanda.autobeancreator.servlet;
+package net.xanda.autobeancreator.servlet.util;
 
-import net.xanda.autobeancreator.servlet.util.DateConverter;
 import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 

@@ -2,7 +2,7 @@ package net.xanda.autobeancreator.servlet.impl;
 
 import net.xanda.autobeancreator.api.AbstractItem;
 import net.xanda.autobeancreator.servlet.AbstractPage;
-import net.xanda.autobeancreator.servlet.MyXSLProc;
+import net.xanda.autobeancreator.servlet.util.MyXSLProc;
 import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -11,8 +11,6 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.IOException;
 
 @WebServlet("/HomePage")
@@ -34,7 +32,7 @@ public class HomePage extends AbstractPage {
         return;
     }
 
-    //creates nodes for the XML document.
+/*    //creates nodes for the XML document.
     public Document createDom(AbstractItem[] inItem, String title, String reason) throws ServletException {
         Document doc = null;
         try {
@@ -62,5 +60,5 @@ public class HomePage extends AbstractPage {
         }
 
         return doc;
-    }
+    }*/
 }
