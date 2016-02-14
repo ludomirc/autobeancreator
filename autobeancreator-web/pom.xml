@@ -18,13 +18,6 @@
 
     <dependencies>
 
-        <!-- local dependency-->
-        <dependency>
-            <groupId>net.xanda.autobeancreator</groupId>
-            <artifactId>autobeancreator-api</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
         <!-- db connector dependency-->
         <dependency>
             <groupId>mysql</groupId>

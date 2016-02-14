@@ -1,6 +1,6 @@
 package net.xanda.autobeancreator.servlet.impl;
 
-import net.xanda.autobeancreator.api.AbstractItem;
+import net.xanda.autobeancreator.model.AbstractItem;
 import net.xanda.autobeancreator.servlet.AbstractPage;
 import net.xanda.autobeancreator.servlet.util.MyXSLProc;
 import org.apache.log4j.Logger;

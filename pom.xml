@@ -4,7 +4,6 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <modules>
-        <module>autobeancreator-api</module>
         <module>autobeancreator-web</module>
     </modules>
 
@@ -29,42 +28,12 @@
                 <scope>provided</scope>
             </dependency>
 
-
-            <!-- JSR 330 -->
-
-            <!-- + -->
-
-
-            <!-- + -->
-
-
-            <!-- struts -->
-
-
-            <!-- log dependence's -->
-
-
-            <!-- hibernate dependency  + -->
-            <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-core</artifactId>
-                <version>5.0.7.Final</version>
-                <scope>provided</scope>
-            </dependency>
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
                 <version>5.1.38</version>
                 <scope>provided</scope>
             </dependency>
-            <!-- + -->
-
-
-            <!-- Postgres SQL 9.4 driver dependency-->
-
-
-            <!-- for test  -->
-
 
         </dependencies>
 
