@@ -30,8 +30,6 @@
                     <br/>
                     import java.sql.Statement;
                     <br/>
-                    import javax.servlet.http.HttpSession;
-                    <br/>
                     import org.w3c.dom.Document;
                     <br/>
                     import org.w3c.dom.Element;
