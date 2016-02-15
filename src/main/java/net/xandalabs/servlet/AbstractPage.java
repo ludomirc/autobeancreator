@@ -108,10 +108,6 @@ public abstract class AbstractPage extends HttpServlet {
     public Connection getConnection() {
         Connection out = null;
         try {
-   /*         Class.forName("org.gjt.mm.mysql.Driver").newInstance();
-            out = DriverManager
-                    .getConnection("jdbc:mysql://localhost/xandalabs?user=xandalabs&&password=xandalabs");
-            System.out.println(">> Connected to XANDAlabs Database");*/
 
             Context initContext = new InitialContext();
             Context envContext  = (Context)initContext.lookup("java:/comp/env");
