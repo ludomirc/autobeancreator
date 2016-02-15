@@ -13,7 +13,8 @@
                     <br/>
 
 
-                    //<b>Bean Creation for
+                    //
+                    <b>Bean Creation for
                         <xsl:value-of select="//Bean/beanName"/>
                     </b>
                     <br/>
@@ -1224,35 +1225,35 @@
                     <xsl:for-each select="//BeanAttribute">
                         public<xsl:text> </xsl:text>
                         <xsl:choose>
-                            <xsl:when test="attTypeID=1">int GET<xsl:value-of select="beanAttName"/>() {<br/>return
+                            <xsl:when test="attTypeID=1">int get<xsl:value-of select="beanAttName"/>() {<br/>return
                                 <xsl:value-of select="beanAttName"/>;<br/>}
                                 <br/>
                                 <br/>
                             </xsl:when>
                         </xsl:choose>
                         <xsl:choose>
-                            <xsl:when test="attTypeID=2">String GET<xsl:value-of select="beanAttName"/>() {<br/>return
+                            <xsl:when test="attTypeID=2">String get<xsl:value-of select="beanAttName"/>() {<br/>return
                                 <xsl:value-of select="beanAttName"/>;<br/>}
                                 <br/>
                                 <br/>
                             </xsl:when>
                         </xsl:choose>
                         <xsl:choose>
-                            <xsl:when test="attTypeID=3">String GET<xsl:value-of select="beanAttName"/>() {<br/>return
+                            <xsl:when test="attTypeID=3">String get<xsl:value-of select="beanAttName"/>() {<br/>return
                                 <xsl:value-of select="beanAttName"/>;<br/>}
                                 <br/>
                                 <br/>
                             </xsl:when>
                         </xsl:choose>
                         <xsl:choose>
-                            <xsl:when test="attTypeID=4">String GET<xsl:value-of select="beanAttName"/>() {<br/>return
+                            <xsl:when test="attTypeID=4">String get<xsl:value-of select="beanAttName"/>() {<br/>return
                                 <xsl:value-of select="beanAttName"/>;<br/>}
                                 <br/>
                                 <br/>
                             </xsl:when>
                         </xsl:choose>
                         <xsl:choose>
-                            <xsl:when test="attTypeID=5">HttpSession GET<xsl:value-of select="beanAttName"/>() {
+                            <xsl:when test="attTypeID=5">HttpSession get<xsl:value-of select="beanAttName"/>() {
                                 <br/>
                                 return <xsl:value-of select="beanAttName"/>;<br/>}
                                 <br/>
@@ -1260,28 +1261,28 @@
                             </xsl:when>
                         </xsl:choose>
                         <xsl:choose>
-                            <xsl:when test="attTypeID=6">String GET<xsl:value-of select="beanAttName"/>() {<br/>return
+                            <xsl:when test="attTypeID=6">String get<xsl:value-of select="beanAttName"/>() {<br/>return
                                 <xsl:value-of select="beanAttName"/>;<br/>}
                                 <br/>
                                 <br/>
                             </xsl:when>
                         </xsl:choose>
                         <xsl:choose>
-                            <xsl:when test="attTypeID=7">String GET<xsl:value-of select="beanAttName"/>() {<br/>return
+                            <xsl:when test="attTypeID=7">String get<xsl:value-of select="beanAttName"/>() {<br/>return
                                 <xsl:value-of select="beanAttName"/>;<br/>}
                                 <br/>
                                 <br/>
                             </xsl:when>
                         </xsl:choose>
                         <xsl:choose>
-                            <xsl:when test="attTypeID=8">int GET<xsl:value-of select="beanAttName"/>() {<br/>return
+                            <xsl:when test="attTypeID=8">int get<xsl:value-of select="beanAttName"/>() {<br/>return
                                 <xsl:value-of select="beanAttName"/>;<br/>}
                                 <br/>
                                 <br/>
                             </xsl:when>
                         </xsl:choose>
                         <xsl:choose>
-                            <xsl:when test="attTypeID=9">float GET<xsl:value-of select="beanAttName"/>() {<br/>return
+                            <xsl:when test="attTypeID=9">float get<xsl:value-of select="beanAttName"/>() {<br/>return
                                 <xsl:value-of select="beanAttName"/>;<br/>}
                                 <br/>
                                 <br/>
@@ -1294,7 +1295,7 @@
                     <xsl:for-each select="//BeanAttribute">
                         public void<xsl:text> </xsl:text>
                         <xsl:choose>
-                            <xsl:when test="attTypeID=1">SET<xsl:value-of select="beanAttName"/>(int <xsl:value-of
+                            <xsl:when test="attTypeID=1">set<xsl:value-of select="beanAttName"/>(int <xsl:value-of
                                     select="beanAttName"/>) {<br/>this.<xsl:value-of
                                     select="beanAttName"/>=<xsl:value-of select="beanAttName"/>;<br/>}
                                 <br/>
@@ -1302,7 +1303,7 @@
                             </xsl:when>
                         </xsl:choose>
                         <xsl:choose>
-                            <xsl:when test="attTypeID=2">SET<xsl:value-of select="beanAttName"/>(String <xsl:value-of
+                            <xsl:when test="attTypeID=2">set<xsl:value-of select="beanAttName"/>(String <xsl:value-of
                                     select="beanAttName"/>) {<br/>this.<xsl:value-of
                                     select="beanAttName"/>=<xsl:value-of select="beanAttName"/>;<br/>}
                                 <br/>
@@ -1310,7 +1311,7 @@
                             </xsl:when>
                         </xsl:choose>
                         <xsl:choose>
-                            <xsl:when test="attTypeID=3">SET<xsl:value-of select="beanAttName"/>(String <xsl:value-of
+                            <xsl:when test="attTypeID=3">set<xsl:value-of select="beanAttName"/>(String <xsl:value-of
                                     select="beanAttName"/>) {<br/>this.<xsl:value-of
                                     select="beanAttName"/>=<xsl:value-of select="beanAttName"/>;<br/>}
                                 <br/>
@@ -1318,7 +1319,7 @@
                             </xsl:when>
                         </xsl:choose>
                         <xsl:choose>
-                            <xsl:when test="attTypeID=4">SET<xsl:value-of select="beanAttName"/>(String <xsl:value-of
+                            <xsl:when test="attTypeID=4">set<xsl:value-of select="beanAttName"/>(String <xsl:value-of
                                     select="beanAttName"/>) {<br/>this.<xsl:value-of
                                     select="beanAttName"/>=<xsl:value-of select="beanAttName"/>;<br/>}
                                 <br/>
@@ -1326,7 +1327,7 @@
                             </xsl:when>
                         </xsl:choose>
                         <xsl:choose>
-                            <xsl:when test="attTypeID=5">SET<xsl:value-of select="beanAttName"/>(HttpSession
+                            <xsl:when test="attTypeID=5">set<xsl:value-of select="beanAttName"/>(HttpSession
                                 <xsl:value-of select="beanAttName"/>) {<br/>this.<xsl:value-of
                                         select="beanAttName"/>=<xsl:value-of select="beanAttName"/>;<br/>}
                                 <br/>
@@ -1334,7 +1335,7 @@
                             </xsl:when>
                         </xsl:choose>
                         <xsl:choose>
-                            <xsl:when test="attTypeID=6">SET<xsl:value-of select="beanAttName"/>(String <xsl:value-of
+                            <xsl:when test="attTypeID=6">set<xsl:value-of select="beanAttName"/>(String <xsl:value-of
                                     select="beanAttName"/>) {<br/>this.<xsl:value-of
                                     select="beanAttName"/>=<xsl:value-of select="beanAttName"/>;<br/>}
                                 <br/>
@@ -1342,7 +1343,7 @@
                             </xsl:when>
                         </xsl:choose>
                         <xsl:choose>
-                            <xsl:when test="attTypeID=7">SET<xsl:value-of select="beanAttName"/>(String <xsl:value-of
+                            <xsl:when test="attTypeID=7">set<xsl:value-of select="beanAttName"/>(String <xsl:value-of
                                     select="beanAttName"/>) {<br/>this.<xsl:value-of
                                     select="beanAttName"/>=<xsl:value-of select="beanAttName"/>;<br/>}
                                 <br/>
@@ -1350,7 +1351,7 @@
                             </xsl:when>
                         </xsl:choose>
                         <xsl:choose>
-                            <xsl:when test="attTypeID=8">SET<xsl:value-of select="beanAttName"/>(int <xsl:value-of
+                            <xsl:when test="attTypeID=8">set<xsl:value-of select="beanAttName"/>(int <xsl:value-of
                                     select="beanAttName"/>) {<br/>this.<xsl:value-of
                                     select="beanAttName"/>=<xsl:value-of select="beanAttName"/>;<br/>}
                                 <br/>
@@ -1358,7 +1359,7 @@
                             </xsl:when>
                         </xsl:choose>
                         <xsl:choose>
-                            <xsl:when test="attTypeID=9">SET<xsl:value-of select="beanAttName"/>(float <xsl:value-of
+                            <xsl:when test="attTypeID=9">set<xsl:value-of select="beanAttName"/>(float <xsl:value-of
                                     select="beanAttName"/>) {<br/>this.<xsl:value-of
                                     select="beanAttName"/>=<xsl:value-of select="beanAttName"/>;<br/>}
                                 <br/>
