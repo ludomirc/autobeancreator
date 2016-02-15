@@ -532,7 +532,7 @@
                     <br/>
                     <br/>
 
-                    if (res.next()){ {
+                    if (res.next()){
                     <br/>
                     return new <xsl:value-of select="//Bean/beanName"/>(
 
