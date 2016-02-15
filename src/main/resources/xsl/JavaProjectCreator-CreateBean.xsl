@@ -292,8 +292,7 @@
                     Statement stmt = con.createStatement();
                     <br/>
                     int updater = stmt.executeUpdate("INSERT INTO
-                    <xsl:value-of select="//Bean/beanNameLowerCase"/> VALUES('',
-
+                    <xsl:value-of select="//Bean/beanNameLowerCase"/> VALUES(
                     <xsl:for-each select="//BeanAttribute">
                         <xsl:choose>
                             <xsl:when test="primaryKey=0">
