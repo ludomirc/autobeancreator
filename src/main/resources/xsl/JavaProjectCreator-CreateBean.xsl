@@ -416,7 +416,7 @@
                     <br/>
                     ResultSet res2 = stmt.executeQuery("SELECT COUNT(*)
 
-                    * FROM <xsl:value-of select="//Bean/beanNameLowerCase"/>;");
+                    FROM <xsl:value-of select="//Bean/beanNameLowerCase"/>;");
                     <br/>
                     <br/>
                     res2.next();
