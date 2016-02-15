@@ -4,11 +4,14 @@ import net.xandalabs.model.AbstractItem;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.sql.DataSource;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.IOException;
@@ -105,10 +108,16 @@ public abstract class AbstractPage extends HttpServlet {
     public Connection getConnection() {
         Connection out = null;
         try {
-            Class.forName("org.gjt.mm.mysql.Driver").newInstance();
+   /*         Class.forName("org.gjt.mm.mysql.Driver").newInstance();
             out = DriverManager
                     .getConnection("jdbc:mysql://localhost/xandalabs?user=xandalabs&&password=xandalabs");
-            System.out.println(">> Connected to XANDAlabs Database");
+            System.out.println(">> Connected to XANDAlabs Database");*/
+
+            Context initContext = new InitialContext();
+            Context envContext  = (Context)initContext.lookup("java:/comp/env");
+            DataSource ds = (DataSource)envContext.lookup("jdbc/XandaLabs");
+            out = ds.getConnection();
+
         } catch (Exception e) {
             System.out.println("Connection error: " + e.toString());
         }
